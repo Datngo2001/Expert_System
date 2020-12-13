@@ -6,7 +6,8 @@ namespace Expert_System
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            KnowledgeBase knowledgeBase = new KnowledgeBase();
+            knowledgeBase.Parse(@"C:\Users\supod\source\repos\Expert_System\Expert_System\law.txt");
         }
     }
 }
