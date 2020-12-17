@@ -7,17 +7,21 @@ namespace Expert_System
 {
     class KnowledgeBase
     {
-        protected List<Parameter> parameters = new List<Parameter>();
         protected List<Rule> rules = new List<Rule>();
+        public List<Rule> Rules
+        {
+            get { return rules; }
+            set { rules = value; }
+        }
+        protected List<Parameter> parameters = new List<Parameter>();
         public List<Parameter> Parameters
         {
             get { return parameters; }
             set { parameters = value; }
         }
-        public List<Rule> Rules
+        public KnowledgeBase(string path)
         {
-            get { return rules; }
-            set { rules = value; }
+            Parse(path);
         }
         public void Parse(string path)
         {
@@ -45,8 +49,8 @@ namespace Expert_System
                         resultParts.AddRange(ruleParts[1].Split("=", 2));
                         Parameter result = new Parameter();
                         result.Name = resultParts[0];
-                        result.Values.Add(resultParts[1]);
-                        rule.Results.Add(result);
+                        result.Value = ToBool(resultParts[1]);
+                        rule.Result = result;
 
                         // Them phan truoc THEN vao rule
                         List<string> conditions = new List<string>();
@@ -57,7 +61,7 @@ namespace Expert_System
                             conditionPart.AddRange(conditions[i].Split("=", 2));
                             Parameter condition = new Parameter();
                             condition.Name = conditionPart[0];
-                            condition.Values.Add(conditionPart[1]);
+                            condition.Value = ToBool(conditionPart[1]);
                             rule.Conditions.Add(condition);
                         }
 
@@ -67,12 +71,8 @@ namespace Expert_System
                     {
                         // doc cac tham so
                         Parameter parameter = new Parameter();
-                        List<string> parameterParts = new List<string>();
-                        parameterParts.AddRange(line.Split("=", 2));
-                        parameter.Name = parameterParts[0];
-                        List<string> values = new List<string>();
-                        values.AddRange(parameterParts[1].Split("|"));
-                        parameter.Values = values;
+                        parameter.Name = line;
+                        parameter.Value = false;
                         Parameters.Add(parameter);
                     }
                 }
@@ -82,6 +82,18 @@ namespace Expert_System
             {
                 Console.WriteLine(e.Message);
             }
+        }
+        protected bool ToBool(string value)
+        {
+            if (value == " Co " || value == " co " || value == " yes " || value == " Yes ")
+            {
+                return true;
+            }
+            else if (value == " Khong " || value == " khong " || value == " No " || value == " no ")
+            {
+                return false;
+            }
+            return false;
         }
     }
 }

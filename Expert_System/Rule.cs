@@ -7,16 +7,16 @@ namespace Expert_System
     class Rule
     {
         protected List<Parameter> conditions = new List<Parameter>();
-        protected List<Parameter> results = new List<Parameter>();
         public List<Parameter> Conditions
         {
             get { return conditions; }
             set { conditions = value; }
         }
-        public List<Parameter> Results
+        protected Parameter result = new Parameter();
+        public Parameter Result
         {
-            get { return results; }
-            set { results = value; }
+            get { return result; }
+            set { result = value; }
         }
     }
 }

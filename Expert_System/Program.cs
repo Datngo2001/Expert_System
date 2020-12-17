@@ -6,8 +6,9 @@ namespace Expert_System
     {
         static void Main(string[] args)
         {
-            KnowledgeBase knowledgeBase = new KnowledgeBase();
-            knowledgeBase.Parse(@"C:\Users\supod\source\repos\Expert_System\Expert_System\law.txt");
+            KnowledgeBase knowledgeBase = new KnowledgeBase(@"C:\Users\supod\source\repos\Expert_System\Expert_System\law.txt");
+            InferenceEngine inferenceEngine = new InferenceEngine(knowledgeBase);
+            inferenceEngine.Start();
         }
     }
 }

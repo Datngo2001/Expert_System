@@ -1,21 +1,13 @@
-﻿Adulthood = yes | not
-Age * = <21 | > = 21
-Working ability * = yes | not
-Monthly Income * = <1000 | 1000-3000 | > 3000
-PropertyStatus = low | medium | high
-LisenRoditeljskeSkrbi * = da | not
-Citizenship * = Croatian | foreign
-DifferenceYears * = <18 | 18-45 | > 45
-Kinship = yes | not
-Right of Adoption = yes | not
------
-# note: coming of age under American law :)
-IF Age = > = 21 THEN Adulthood = yes
+﻿
+
+Age > 18
+
+IF Age = yes THEN Adulthood = yes & 
 IF Age = <21 THEN Adulthood = no
 IF Working Ability = Yes & Monthly Income = <1000 THEN Asset Status = Low
 IF Working Ability = Yes & MonthlyIncome = 1000-3000 THEN PropertyStatus = Medium
 IF Working Ability = Yes & Monthly Income => 3000 THEN Property Status = High
 IF LisenParental Care = yes THEN Right of Adoption = no
 IF Kinship = yes THEN Right of Adoption = no
-IF Adulthood = yes & DifferenceYears = <18 |> 45 THEN Adoption Rights = no
-IF Adulthood = yes & DifferenceYears = 18-45 & PropertyStatus = medium | high THEN Adoption Right = yes
+IF Adulthood = yes & DifferenceYears = <18 |> 45 THEN Adoption Rights * = no
+IF Adulthood = yes & DifferenceYears = 18-45 & PropertyStatus = medium | high THEN Adoption Right * = yes
