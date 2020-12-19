@@ -1,5 +1,10 @@
-﻿đau tai
-đau hong
-đau mui
-IF sot cao = co & đau tai = co & đau nhuc đau = co THEN viem tai giua* = co
+﻿dau tai
+dau hong
+so mui
+IF dau tai = co & sot cao = co & đau nhuc đau = co THEN viem tai giua* = co
 IF viem tai giua* = co & dung tai nghe = co THEN Khong dung tai nghe nua+ = co
+IF dau hong = co & thuong khat nuoc = co & dau minh nay = co & sot cao = co & on lanh = co & đau nhuc đau = co THEN viem hong* = co
+IF dau hong = co & thuong khat nuoc = co & dau minh nay = co & sot cao = co & đau nhuc đau = co THEN viem hong* = co
+IF viem hong* = co & bi hon 10 ngay = co THEN viem hong man tinh* = co
+IF viem hong* = co THEN nghi ngoi, suc hong, uong thuoc giam sot, giam dau+ = co
+

@@ -47,6 +47,10 @@ namespace Expert_System
                                 if(Base.Rules[i].Conditions[j].Value != answer)
                                 {
                                     satify = false;
+                                    Parameter fact = new Parameter();
+                                    fact.Name = Base.Rules[i].Conditions[j].Name;
+                                    fact.Value = answer;
+                                    Facts.Add(fact);
                                 }
                                 else
                                 {
@@ -78,7 +82,7 @@ namespace Expert_System
                 }
             }
             Console.WriteLine();
-            Console.WriteLine("Ban nen bi: ");
+            Console.WriteLine("Ban nen: ");
             for (int i = 0; i < Facts.Count; i++)
             {
                 if (Facts[i].Name.EndsWith('+') && Facts[i].Value == true)
@@ -128,7 +132,7 @@ namespace Expert_System
         {
             for (int i = 0; i < Facts.Count; i++)
             {
-                if(parameter.Name == Facts[i].Name && parameter.Value == Facts[i].Value)
+                if(parameter.Name == Facts[i].Name)
                 {
                     return true;
                 }
@@ -139,13 +143,12 @@ namespace Expert_System
         {
             for (int i = 0; i < conditions.Count; i++)
             {
-                if (SearchFact(conditions[i]))
+                for (int j = 0; j < Facts.Count; j++)
                 {
-                    return true;
-                }
-                else
-                {
-                    
+                    if(conditions[i].Name == Facts[j].Name && conditions[i].Value == Facts[j].Value)
+                    {
+                        return true;
+                    }
                 }
             }
             return false;
