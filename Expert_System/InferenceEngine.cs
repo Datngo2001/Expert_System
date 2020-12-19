@@ -28,48 +28,48 @@ namespace Expert_System
                 Base.Parameters[i].Value = askPeople(Base.Parameters[i]);
                 Facts.Add(Base.Parameters[i]);
             }
-            //do
-            //{
-
-            //} while (FactIncrease());
-            for (int i = 0; i < Base.Rules.Count; i++)
+            do
             {
-                if (isRelated(Base.Rules[i].Conditions))
+                for (int i = 0; i < Base.Rules.Count; i++)
                 {
-                    bool satify = true;
-                    for (int j = 0; j < Base.Rules[i].Conditions.Count; j++)
+                    if (isRelated(Base.Rules[i].Conditions))
                     {
-                        if (SearchFact(Base.Rules[i].Conditions[j]))
+                        bool satify = true;
+                        for (int j = 0; j < Base.Rules[i].Conditions.Count && satify; j++)
                         {
-                            continue;
-                        }
-                        else
-                        {
-                            bool answer = askPeople(Base.Rules[i].Conditions[j]);
-                            if (Base.Rules[i].Conditions[j].Value != answer)
+                            if (isAsked(Base.Rules[i].Conditions[j]))
                             {
-                                satify = false;
-                                Parameter fact = new Parameter();
-                                fact.Name = Base.Rules[i].Conditions[j].Name;
-                                fact.Value = answer;
-                                Facts.Add(fact);
+                                continue;
                             }
                             else
                             {
-                                Facts.Add(Base.Rules[i].Conditions[j]);
+                                bool answer = askPeople(Base.Rules[i].Conditions[j]);
+                                if (Base.Rules[i].Conditions[j].Value != answer)
+                                {
+                                    satify = false;
+                                    Parameter fact = new Parameter();
+                                    fact.Name = Base.Rules[i].Conditions[j].Name;
+                                    fact.Value = answer;
+                                    Facts.Add(fact);
+                                }
+                                else
+                                {
+                                    Facts.Add(Base.Rules[i].Conditions[j]);
+                                }
                             }
                         }
+                        if (satify && !SearchFact(Base.Rules[i].Result))
+                        {
+                            Facts.Add(Base.Rules[i].Result);
+                        }
                     }
-                    if (satify && !SearchFact(Base.Rules[i].Result))
+                    else
                     {
-                        Facts.Add(Base.Rules[i].Result);
+                        continue;
                     }
                 }
-                else
-                {
-                    continue;
-                }
-            }
+            } while (FactIncrease());
+
         }
         public void ShowResult()
         {
@@ -151,6 +151,17 @@ namespace Expert_System
                 else
                 {
                     
+                }
+            }
+            return false;
+        }
+        protected bool isAsked(Parameter parameter)
+        {
+            for (int i = 0; i < Facts.Count; i++)
+            {
+                if (parameter.Name == Facts[i].Name)
+                {
+                    return true;
                 }
             }
             return false;
