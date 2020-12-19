@@ -1,0 +1,5 @@
+﻿đau tai
+đau hong
+đau mui
+IF sot cao = co & đau tai = co & đau nhuc đau = co THEN viem tai giua* = co
+IF viem tai giua* = co & dung tai nghe = co THEN Khong dung tai nghe nua+ = co

@@ -32,6 +32,7 @@ namespace Expert_System
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
+                    line = line.TrimStart();
 
                     if (line == "" || line[0] == '-' || line[0] == '#') continue;
 
@@ -48,7 +49,9 @@ namespace Expert_System
                         List<string> resultParts = new List<string>();
                         resultParts.AddRange(ruleParts[1].Split("=", 2));
                         Parameter result = new Parameter();
+                        resultParts[0] = resultParts[0].Trim();
                         result.Name = resultParts[0];
+                        resultParts[1] = resultParts[1].Trim();
                         result.Value = ToBool(resultParts[1]);
                         rule.Result = result;
 
@@ -60,7 +63,9 @@ namespace Expert_System
                             List<string> conditionPart = new List<string>();
                             conditionPart.AddRange(conditions[i].Split("=", 2));
                             Parameter condition = new Parameter();
+                            conditionPart[0] = conditionPart[0].Trim();
                             condition.Name = conditionPart[0];
+                            conditionPart[1] = conditionPart[1].Trim();
                             condition.Value = ToBool(conditionPart[1]);
                             rule.Conditions.Add(condition);
                         }
@@ -85,11 +90,11 @@ namespace Expert_System
         }
         protected bool ToBool(string value)
         {
-            if (value == " Co " || value == " co " || value == " yes " || value == " Yes ")
+            if (value == "Co" || value == "co" || value == "yes" || value == "Yes")
             {
                 return true;
             }
-            else if (value == " Khong " || value == " khong " || value == " No " || value == " no ")
+            else if (value == "Khong" || value == "khong" || value == "No" || value == "no" || value == "ko")
             {
                 return false;
             }

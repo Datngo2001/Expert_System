@@ -48,9 +48,13 @@ namespace Expert_System
                                 {
                                     satify = false;
                                 }
+                                else
+                                {
+                                    Facts.Add(Base.Rules[i].Conditions[j]);
+                                }
                             }
                         }
-                        if (satify)
+                        if (satify && !SearchFact(Base.Rules[i].Result))
                         {
                             Facts.Add(Base.Rules[i].Result);
                         }
@@ -61,6 +65,28 @@ namespace Expert_System
                     }
                 }
             } while (FactIncrease());
+        }
+        public void ShowResult()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Co the ban bi: ");
+            for (int i = 0; i < Facts.Count; i++)
+            {
+                if (Facts[i].Name.EndsWith('*') && Facts[i].Value == true)
+                {
+                    Console.WriteLine(Facts[i].Name.Remove(Facts[i].Name.Length - 1, 1));
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine("Ban nen bi: ");
+            for (int i = 0; i < Facts.Count; i++)
+            {
+                if (Facts[i].Name.EndsWith('+') && Facts[i].Value == true)
+                {
+                    Console.WriteLine(Facts[i].Name.Remove(Facts[i].Name.Length - 1, 1));
+                }
+            }
+            Console.ResetColor();
         }
         protected bool askPeople(Parameter parameter)
         {
@@ -81,6 +107,7 @@ namespace Expert_System
         {
             if(Facts.Count > lastCount)
             {
+                lastCount = Facts.Count;
                 return true;
             }
             return false;
@@ -114,14 +141,14 @@ namespace Expert_System
             {
                 if (SearchFact(conditions[i]))
                 {
-                    continue;
+                    return true;
                 }
                 else
                 {
-                    return false;
+                    
                 }
             }
-            return true;
+            return false;
         }
     }
 }
