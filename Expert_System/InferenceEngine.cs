@@ -39,7 +39,10 @@ namespace Expert_System
                         {
                             if (isAsked(Base.Rules[i].Conditions[j]))
                             {
-                                continue;
+                                if (!SearchFact(Base.Rules[i].Conditions[j]))
+                                {
+                                    satify = false;
+                                }
                             }
                             else
                             {
