@@ -1,7 +1,9 @@
 ﻿dau tai
 dau hong
-dau mui
-IF viem tai giua* = co & dung tai nghe = co THEN Khong dung tai nghe nua+ = co
+so mui
 IF dau hong = co & rat hong = co & hay khat nuoc = co & dau nhuc dau = co THEN viem hong* = co
 IF sot cao = co & dau tai = co & dau nhuc dau = co THEN viem tai giua* = co
+IF viem tai giua* = co & dung tai nghe = co THEN Khong dung tai nghe nua+ = co
+IF so mui = co & sot = co & ngat mui = co & dau nhuc an i vung mat = co & bi ho co dom = co THEN viem xoan* = co
+IF so mui = co & dau hong = co & sot = co & dau nhoi vung hong = co & khan tieng = co & hoi tho hoi = co THEN viem amidan* = co
 
