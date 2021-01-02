@@ -61,9 +61,15 @@ namespace Expert_System
                                 }
                             }
                         }
-                        if (satify && !SearchFact(Base.Rules[i].Result))
+                        if (satify)
                         {
-                            Facts.Add(Base.Rules[i].Result);
+                            for (int j = 0; j < Base.Rules[i].Results.Count; j++)
+                            {
+                                if (!SearchFact(Base.Rules[i].Results[j]))
+                                {
+                                    Facts.Add(Base.Rules[i].Results[j]);
+                                }
+                            }
                         }
                     }
                     else
@@ -126,7 +132,7 @@ namespace Expert_System
             {
                 return true;
             }
-            else if (value == "Khong" || value == "khong" || value == "No" || value == "no")
+            else if (value == "Khong" || value == "ko" || value == "khong" || value == "No" || value == "no")
             {
                 return false;
             }
@@ -158,11 +164,11 @@ namespace Expert_System
             }
             return false;
         }
-        protected bool isAsked(Parameter parameter)
+        protected bool isAsked(Parameter condition)
         {
             for (int i = 0; i < Facts.Count; i++)
             {
-                if (parameter.Name == Facts[i].Name)
+                if (condition.Name == Facts[i].Name)
                 {
                     return true;
                 }

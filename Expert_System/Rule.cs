@@ -12,11 +12,11 @@ namespace Expert_System
             get { return conditions; }
             set { conditions = value; }
         }
-        protected Parameter result = new Parameter();
-        public Parameter Result
+        protected List<Parameter> results = new List<Parameter>();
+        public List<Parameter> Results
         {
-            get { return result; }
-            set { result = value; }
+            get { return results; }
+            set { results = value; }
         }
     }
 }

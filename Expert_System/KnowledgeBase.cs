@@ -45,19 +45,9 @@ namespace Expert_System
                         List<string> ruleParts = new List<string>();
                         ruleParts.AddRange(line.Split("THEN")); //Chia lam 2 phan truoc THEN va sau THEN
 
-                        // Them phan sau THEN vao rule
-                        List<string> resultParts = new List<string>();
-                        resultParts.AddRange(ruleParts[1].Split("=", 2));
-                        Parameter result = new Parameter();
-                        resultParts[0] = resultParts[0].Trim();
-                        result.Name = resultParts[0];
-                        resultParts[1] = resultParts[1].Trim();
-                        result.Value = ToBool(resultParts[1]);
-                        rule.Result = result;
-
                         // Them phan truoc THEN vao rule
                         List<string> conditions = new List<string>();
-                        conditions.AddRange(ruleParts[0].Split("&"));
+                        conditions.AddRange(ruleParts[0].Split(","));
                         for (int i = 0; i < conditions.Count; i++)
                         {
                             List<string> conditionPart = new List<string>();
@@ -68,6 +58,21 @@ namespace Expert_System
                             conditionPart[1] = conditionPart[1].Trim();
                             condition.Value = ToBool(conditionPart[1]);
                             rule.Conditions.Add(condition);
+                        }
+
+                        // Them phan sau THEN vao rule
+                        List<string> results = new List<string>();
+                        results.AddRange(ruleParts[1].Split(","));
+                        for (int i = 0; i < results.Count; i++)
+                        {
+                            List<string> resultParts = new List<string>();
+                            resultParts.AddRange(ruleParts[1].Split("=", 2));
+                            Parameter result = new Parameter();
+                            resultParts[0] = resultParts[0].Trim();
+                            result.Name = resultParts[0];
+                            resultParts[1] = resultParts[1].Trim();
+                            result.Value = ToBool(resultParts[1]);
+                            rule.Results.Add(result);
                         }
 
                         Rules.Add(rule);
